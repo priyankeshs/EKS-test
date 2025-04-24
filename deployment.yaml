@@ -1,19 +1,12 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Service
 metadata:
-  name: nginx-deployment
+  name: demo-service
 spec:
-  replicas: 1
+  type: LoadBalancer
   selector:
-    matchLabels:
-      app: nginx
-  template:
-    metadata:
-      labels:
-        app: nginx
-    spec:
-      containers:
-        - name: nginx
-          image: nginx:latest
-          ports:
-            - containerPort: 80
+    app: demo
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
